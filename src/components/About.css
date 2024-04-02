@@ -1,0 +1,33 @@
+.About {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center the profiles vertically */
+  justify-content: center; /* Center the profiles horizontally */
+  gap: 8rem;
+  flex: 1; /* Takes up the remaining space in the .main-content */
+  padding: 20px; /* Adds padding around the content */
+}
+
+.Profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content of each profile */
+  margin-bottom: 20px; /* Adds space between profiles */
+}
+
+.profile-circle {
+  width: 170px; /* Diameter of the circle */
+  height: 170px; /* Diameter of the circle */
+  border-radius: 50%;
+  border: 2px solid #fff; /* Optional: adds a border around the image */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Optional: adds a shadow for depth */
+  background-image: url("../assets/fabio-niglio.jpg"); /* Path to the image */
+  background-position: 75% 25%; /* Adjust this to focus on the face */
+  background-size: cover; /* Ensures the circle is fully covered by the image */
+}
+
+.About p {
+  color: white;
+  font-size: 30px;
+  font-weight: 400;
+}
