@@ -1,0 +1,38 @@
+.Navbar {
+  width: 95vw;
+  height: 60px;
+  display: flex;
+
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+nav ul li {
+  margin: 0 20px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav ul li:first-child {
+  margin-left: 30px;
+}
+
+nav ul li {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav ul li:hover {
+  background-color: #111;
+}
