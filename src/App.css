@@ -1,0 +1,8 @@
+.main-content {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  background-image: url("./assets/background-image.jpg");
+  background-size: cover;
+  padding: 10px 20px;
+}

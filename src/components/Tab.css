@@ -1,0 +1,9 @@
+.tab {
+  width: 20vw;
+  height: 5vh;
+  margin: 5px 0;
+  background-color: #5e1913;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
