@@ -1,0 +1,19 @@
+.navbar {
+  padding-left: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.app-logo {
+  height: 40px;
+  width: 40px;
+  margin: 7px;
+}
+
+.app-logo + h3 {
+  display: inline;
+  margin: 5px;
+  font-size: 1.5em;
+  font-family: "Pacifico", cursive;
+}

@@ -1,0 +1,17 @@
+.section {
+  height: 97%;
+  width: 33%;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: rgb(180, 156, 131, 0.4);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.section button {
+  width: 360px;
+  height: 30px;
+  margin: 5px;
+}

@@ -1,0 +1,36 @@
+.card {
+  width: 350px;
+  height: auto;
+  background-color: #795f4c7d;
+  text-align: left;
+  padding: 2px 5px;
+  margin: 5px;
+  position: relative;
+}
+
+.card h4 {
+  margin: 5px;
+}
+
+.card p {
+  margin: 5px;
+  font-size: 0.8em;
+}
+
+.card button {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+}
+
+.card img {
+  width: 10px;
+  height: 10px;
+}
+
+.card button:hover {
+  background-color: #62514c;
+}

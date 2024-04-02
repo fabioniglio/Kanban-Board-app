@@ -4,4 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.9em;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #382e2b;
+  font-weight: bold;
 }

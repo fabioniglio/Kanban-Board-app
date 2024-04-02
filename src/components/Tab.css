@@ -1,8 +1,8 @@
 .tab {
-  width: 20vw;
+  width: auto;
   height: 5vh;
-  margin: 5px 0;
-  background-color: #5e1913;
+  margin: 5px 5px;
+  background-color: #ab9d8c;
   display: flex;
   justify-content: center;
   align-items: center;
