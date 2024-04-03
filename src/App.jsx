@@ -1,7 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import Content from "./components/Content";
+import Content from "./Pages/Content";
 import Footer from "./components/Footer";
 import About from "./Pages/About";
 
@@ -11,8 +11,8 @@ function App() {
       <Navbar />
       <div className="main-content">
         <Sidebar />
-        {/* <Content /> */}
-        <About />
+        <Content />
+        {/* <About /> */}
       </div>
       <Footer />
     </div>

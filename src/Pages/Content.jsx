@@ -1,5 +1,5 @@
 import classes from "../styles/Content.module.css";
-import Section from "./Section";
+import Section from "../components/Section";
 import kanbanData from "../assets/data/kanban.json";
 
 const Content = () => {
