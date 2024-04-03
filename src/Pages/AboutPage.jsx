@@ -1,6 +1,6 @@
-import classes from "../styles/About.module.css";
+import classes from "../styles/AboutPage.module.css";
 
-function About() {
+function AboutPage() {
   return (
     <div className={classes.container}>
       <div className={classes.appDetails}>
@@ -31,4 +31,4 @@ function About() {
   );
 }
 
-export default About;
+export default AboutPage;

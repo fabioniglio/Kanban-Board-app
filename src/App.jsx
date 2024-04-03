@@ -1,9 +1,12 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import Content from "./Pages/Content";
+import ContentPage from "./Pages/ContentPage";
 import Footer from "./components/Footer";
-import About from "./Pages/About";
+import AboutPage from "./Pages/AboutPage";
+// import ContentDetailPage from "./Pages/ContentDetailPage";
+import ErrorPage from "./Pages/ErrorPage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -11,8 +14,12 @@ function App() {
       <Navbar />
       <div className="main-content">
         <Sidebar />
-        <Content />
-        {/* <About /> */}
+        <Routes>
+          <Route path="/" element={<ContentPage />} />
+          {/* <Route path="/content/:taskId" element={<Content />} /> */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
       </div>
       <Footer />
     </div>

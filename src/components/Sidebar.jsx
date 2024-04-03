@@ -1,11 +1,16 @@
 import classes from "../styles/Sidebar.module.css";
 import Tab from "./Tab";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <div className={classes.container}>
-      <Tab tabName="Board" />
-      <Tab tabName="About" />
+      <NavLink to="/">
+        <Tab tabName="Board" />
+      </NavLink>
+      <NavLink to="/about">
+        <Tab tabName="About" />
+      </NavLink>
     </div>
   );
 };

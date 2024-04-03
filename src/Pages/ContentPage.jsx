@@ -1,8 +1,8 @@
-import classes from "../styles/Content.module.css";
+import classes from "../styles/ContentPage.module.css";
 import Section from "../components/Section";
 import kanbanData from "../assets/data/kanban.json";
 
-const Content = () => {
+const ContentPage = () => {
   return (
     <div className={classes.container}>
       <Section status="To Do" kanbanDataList={kanbanData} />
@@ -12,4 +12,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default ContentPage;
