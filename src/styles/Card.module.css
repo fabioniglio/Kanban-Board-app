@@ -1,15 +1,18 @@
 .container {
-  width: 350px;
+  width: 350px; /* Makes sure the card does not exceed the section's width */
   height: auto;
   background-color: #795f4c7d;
   text-align: left;
   padding: 2px 5px;
   margin: 5px;
   position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Adds subtle shadow for depth */
+  border-radius: 5px;
 }
 
 .heading {
   margin: 5px;
+  font-size: 1.2em;
 }
 
 .text {
@@ -18,19 +21,28 @@
 }
 
 .btn {
-  width: 20px;
-  height: 20px;
+  width: 25px; /* Increased width and height for easier interaction */
+  height: 25px;
   padding: 0;
   position: absolute;
-  right: 5px;
-  top: 2px;
+  right: 10px; /* Adjusted for consistency */
+  top: 5px;
+  cursor: pointer; /* Ensures it's clear it's clickable */
+  border-radius: 50%;
 }
 
 .img {
-  width: 10px;
-  height: 10px;
+  width: 1.4vh;
+  height: auto;
 }
 
 .btn:hover {
   background-color: #62514c;
+}
+
+@media (max-width: 768px) {
+  .container {
+    /* Adjust card styling for smaller screens */
+    padding: 10px;
+  }
 }

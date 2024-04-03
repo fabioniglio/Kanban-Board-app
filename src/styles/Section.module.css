@@ -1,6 +1,6 @@
 .container {
-  height: 97%;
-  width: 33%;
+  height: 95vh;
+  width: 100%;
   margin: 10px;
   border-radius: 10px;
   background-color: rgb(180, 156, 131, 0.4);
@@ -8,10 +8,47 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  overflow-y: auto;
 }
 
 .btn {
-  width: 360px;
-  height: 30px;
-  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Adjust size as needed */
+  height: 50px; /* Adjust size as needed */
+  margin: 10px;
+  border-radius: 50%; /* Circular shape */
+  background-color: #007bff; /* Bright, noticeable color */
+  color: white; /* Contrast color for the + sign */
+  font-size: 1.5rem; /* Make the + sign larger and more visible */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Indicates the button is clickable */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions for interactions */
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #0056b3; /* Slightly darker shade on hover/focus for feedback */
+  transform: scale(
+    1.1
+  ); /* Slightly enlarge on hover/focus for interaction feedback */
+}
+
+.btn:active {
+  background-color: #004088; /* Even darker shade for the active state */
+  transform: scale(0.95); /* Slightly shrink as if being pressed */
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 50%; /* Adjust for medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 33%; /* Adjust back for larger screens */
+  }
 }

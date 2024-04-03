@@ -36,7 +36,6 @@
   margin-top: 15px;
 }
 
-/* Style for inputs, text areas, etc., if you have a form inside the modal */
 input,
 textarea {
   width: 100%;
@@ -48,12 +47,16 @@ textarea {
   border-radius: 4px;
 }
 
-/* Style for buttons inside the modal, if applicable */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
 .button {
   background-color: #007bff; /* Blue */
   color: white;
   padding: 10px 20px;
-  margin: 10px 0;
   border: none;
   border-radius: 5px;
   cursor: pointer;

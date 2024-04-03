@@ -11,14 +11,27 @@ const Section = ({ status, kanbanDataList }) => {
   );
   const [selectedCard, setSelectedCard] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [modalMode, setModalMode] = useState("add"); // 'add' or 'edit'
 
   const handleCardSelect = (cardData) => {
     setSelectedCard(cardData);
+    setModalMode("edit");
     setIsModalOpen(true); // Open the modal
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const handleAddNew = () => {
+    setSelectedCard({
+      id: null, // temporary null, will need a unique ID when actually adding
+      title: "",
+      description: "",
+      assignee: "",
+      status: status, // Assuming status comes from the Section's props
+      priority: "",
+      createdDate: "", // Could autofill with today's date
+      dueDate: "",
+    });
+    setModalMode("add");
+    setIsModalOpen(true);
   };
 
   const deleteCard = (cardId) => {
@@ -27,6 +40,32 @@ const Section = ({ status, kanbanDataList }) => {
         return currentData.id != cardId;
       })
     );
+  };
+
+  const handleAddSubmit = (e) => {
+    e.preventDefault();
+    const newCard = {
+      ...selectedCard,
+      id: Date.now().toString(), // Simple unique ID generator, consider a more robust approach for real apps
+    };
+    setDataList([...dataList, newCard]);
+    setIsModalOpen(false);
+    setSelectedCard(null);
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+
+    if (selectedCard && selectedCard.id) {
+      const updatedDataList = dataList.map((item) =>
+        item.id === selectedCard.id ? { ...item, ...selectedCard } : item
+      );
+      setDataList(updatedDataList);
+      setIsModalOpen(false);
+      setSelectedCard(null);
+    } else {
+      console.log("Error: selectedCard.id is not set correctly.");
+    }
   };
 
   return (
@@ -45,7 +84,7 @@ const Section = ({ status, kanbanDataList }) => {
           </div>
         );
       })}
-      <button type="button" className={classes.btn} onClick={toggleModal}>
+      <button type="button" className={classes.btn} onClick={handleAddNew}>
         +
       </button>
       <Modal
@@ -53,27 +92,42 @@ const Section = ({ status, kanbanDataList }) => {
         onClose={() => {
           setIsModalOpen(false);
           setSelectedCard(null);
+          setModalMode("add");
         }}
       >
         {selectedCard && (
-          <div className="modal-content">
-            <h3>{selectedCard.title}</h3>
-            <p>
-              <strong>Description:</strong> {selectedCard.description}
-            </p>
-            <p>
-              <strong>Assignee:</strong> {selectedCard.assignee}
-            </p>
-            <p>
-              <strong>Status:</strong> {selectedCard.status}
-            </p>
-            <p>
-              <strong>Priority:</strong> {selectedCard.priority}
-            </p>
-            <p>
-              <strong>Due Date:</strong> {selectedCard.dueDate}
-            </p>
-          </div>
+          <form
+            onSubmit={modalMode === "add" ? handleAddSubmit : handleEditSubmit}
+            className="modal-content"
+          >
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              value={selectedCard.title}
+              onChange={(e) =>
+                setSelectedCard({ ...selectedCard, title: e.target.value })
+              }
+            />
+
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              value={selectedCard.description}
+              onChange={(e) =>
+                setSelectedCard({
+                  ...selectedCard,
+                  description: e.target.value,
+                })
+              }
+            ></textarea>
+
+            {/* Repeat for other properties as needed */}
+
+            <button type="submit" className="button">
+              Save Changes
+            </button>
+          </form>
         )}
       </Modal>
     </div>
