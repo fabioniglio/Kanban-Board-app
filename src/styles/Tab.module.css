@@ -7,3 +7,7 @@
   justify-content: center;
   align-items: center;
 }
+
+.active {
+  background-color: #82654f;
+}

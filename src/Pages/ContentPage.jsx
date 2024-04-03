@@ -1,6 +1,6 @@
+import kanbanData from "../assets/data/kanban.json";
 import classes from "../styles/ContentPage.module.css";
 import Section from "../components/Section";
-import kanbanData from "../assets/data/kanban.json";
 
 const ContentPage = () => {
   return (

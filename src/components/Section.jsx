@@ -1,6 +1,6 @@
+import { useState } from "react";
 import classes from "../styles/Section.module.css";
 import Card from "./Card";
-import { useState } from "react";
 
 const Section = ({ status, kanbanDataList }) => {
   const [dataList, setDataList] = useState(

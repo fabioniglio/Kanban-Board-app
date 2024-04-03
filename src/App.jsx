@@ -4,7 +4,6 @@ import Sidebar from "./components/Sidebar";
 import ContentPage from "./Pages/ContentPage";
 import Footer from "./components/Footer";
 import AboutPage from "./Pages/AboutPage";
-// import ContentDetailPage from "./Pages/ContentDetailPage";
 import ErrorPage from "./Pages/ErrorPage";
 import { Routes, Route } from "react-router-dom";
 
@@ -16,7 +15,6 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<ContentPage />} />
-          {/* <Route path="/content/:taskId" element={<Content />} /> */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
