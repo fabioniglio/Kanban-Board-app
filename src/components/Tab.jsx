@@ -1,7 +1,7 @@
-import "./Tab.css";
+import classes from "../styles/Tab.module.css";
 
 const Tab = ({ tabName }) => {
-  return <div className="tab">{tabName}</div>;
+  return <div className={classes.container}>{tabName}</div>;
 };
 
 export default Tab;

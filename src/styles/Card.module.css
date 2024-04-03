@@ -1,4 +1,4 @@
-.card {
+.container {
   width: 350px;
   height: auto;
   background-color: #795f4c7d;
@@ -8,16 +8,16 @@
   position: relative;
 }
 
-.card h4 {
+.heading {
   margin: 5px;
 }
 
-.card p {
+.text {
   margin: 5px;
   font-size: 0.8em;
 }
 
-.card button {
+.btn {
   width: 20px;
   height: 20px;
   padding: 0;
@@ -26,11 +26,11 @@
   top: 2px;
 }
 
-.card img {
+.img {
   width: 10px;
   height: 10px;
 }
 
-.card button:hover {
+.btn:hover {
   background-color: #62514c;
 }

@@ -1,8 +1,9 @@
-import "./Sidebar.css";
+import classes from "../styles/Sidebar.module.css";
 import Tab from "./Tab";
+
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <div className={classes.container}>
       <Tab tabName="Board" />
       <Tab tabName="About" />
     </div>

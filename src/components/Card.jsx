@@ -1,12 +1,12 @@
-import "./Card.css";
+import classes from "../styles/Card.module.css";
 import deleteImg from "../assets/images/delete.png";
 const Card = ({ cardData, onDelete }) => {
   return (
-    <div className="card">
-      <h4>{cardData.title}</h4>
-      <p>{cardData.description}</p>
-      <button type="button" onClick={onDelete}>
-        <img src={deleteImg} alt="Delete Image" />
+    <div className={classes.container}>
+      <h4 className={classes.heading}>{cardData.title}</h4>
+      <p className={classes.text}>{cardData.description}</p>
+      <button type="button" onClick={onDelete} className={classes.btn}>
+        <img src={deleteImg} alt="Delete Image" className={classes.img} />
       </button>
     </div>
   );

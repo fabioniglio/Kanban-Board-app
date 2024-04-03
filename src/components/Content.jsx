@@ -1,10 +1,10 @@
-import "./Content.css";
+import classes from "../styles/Content.module.css";
 import Section from "./Section";
 import kanbanData from "../assets/data/kanban.json";
 
 const Content = () => {
   return (
-    <div className="content">
+    <div className={classes.container}>
       <Section status="To Do" kanbanDataList={kanbanData} />
       <Section status="In Progress" kanbanDataList={kanbanData} />
       <Section status="Done" kanbanDataList={kanbanData} />

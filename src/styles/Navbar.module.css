@@ -1,17 +1,17 @@
-.navbar {
+.container {
   padding-left: 50px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.app-logo {
+.appLogo {
   height: 40px;
   width: 40px;
   margin: 7px;
 }
 
-.app-logo + h3 {
+.appName {
   display: inline;
   margin: 5px;
   font-size: 1.5em;

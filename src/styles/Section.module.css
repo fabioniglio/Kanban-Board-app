@@ -1,4 +1,4 @@
-.section {
+.container {
   height: 97%;
   width: 33%;
   margin: 10px;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.section button {
+.btn {
   width: 360px;
   height: 30px;
   margin: 5px;

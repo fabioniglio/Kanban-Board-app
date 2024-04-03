@@ -1,4 +1,4 @@
-.footer {
+.container {
   width: 95vw;
   height: 30px;
   display: flex;
@@ -7,7 +7,7 @@
   font-size: 0.9em;
 }
 
-.footer a {
+.link {
   text-decoration: none;
   color: #382e2b;
   font-weight: bold;

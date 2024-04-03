@@ -1,11 +1,11 @@
-import "./Navbar.css";
+import classes from "../styles/Navbar.module.css";
 import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
-      <img src={logo} alt="App Logo" className="app-logo" />
-      <h3>Trello</h3>
+    <div className={classes.container}>
+      <img src={logo} alt="App Logo" className={classes.appLogo} />
+      <h3 className={classes.appName}>Trello</h3>
     </div>
   );
 };

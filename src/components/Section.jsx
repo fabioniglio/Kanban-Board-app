@@ -1,4 +1,4 @@
-import "./Section.css";
+import classes from "../styles/Section.module.css";
 import Card from "./Card";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ const Section = ({ status, kanbanDataList }) => {
   };
 
   return (
-    <div className="section">
+    <div className={classes.container}>
       <h3>{status}</h3>
       {dataList.map((currentData) => {
         return (
@@ -30,7 +30,9 @@ const Section = ({ status, kanbanDataList }) => {
           </div>
         );
       })}
-      <button type="button">+</button>
+      <button type="button" className={classes.btn}>
+        +
+      </button>
     </div>
   );
 };
