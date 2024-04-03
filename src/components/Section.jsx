@@ -10,24 +10,24 @@ const Section = ({ status, kanbanDataList }) => {
     })
   );
   const [selectedCard, setSelectedCard] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [modalMode, setModalMode] = useState("add"); // 'add' or 'edit'
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState("add");
 
   const handleCardSelect = (cardData) => {
     setSelectedCard(cardData);
     setModalMode("edit");
-    setIsModalOpen(true); // Open the modal
+    setIsModalOpen(true);
   };
 
   const handleAddNew = () => {
     setSelectedCard({
-      id: null, // temporary null, will need a unique ID when actually adding
+      id: null,
       title: "",
       description: "",
       assignee: "",
-      status: status, // Assuming status comes from the Section's props
+      status: status,
       priority: "",
-      createdDate: "", // Could autofill with today's date
+      createdDate: "",
       dueDate: "",
     });
     setModalMode("add");
@@ -46,7 +46,7 @@ const Section = ({ status, kanbanDataList }) => {
     e.preventDefault();
     const newCard = {
       ...selectedCard,
-      id: Date.now().toString(), // Simple unique ID generator, consider a more robust approach for real apps
+      id: Date.now().toString(),
     };
     setDataList([...dataList, newCard]);
     setIsModalOpen(false);
@@ -121,8 +121,6 @@ const Section = ({ status, kanbanDataList }) => {
                 })
               }
             ></textarea>
-
-            {/* Repeat for other properties as needed */}
 
             <button type="submit" className="button">
               Save Changes
