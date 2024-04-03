@@ -1,0 +1,7 @@
+.container {
+  width: 80vw;
+  height: 87vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
