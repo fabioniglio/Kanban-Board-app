@@ -1,8 +1,8 @@
 import classes from "../styles/Card.module.css";
 import deleteImg from "../assets/images/delete.png";
-const Card = ({ cardData, onDelete }) => {
+const Card = ({ cardData, onClickHandler, onDelete }) => {
   return (
-    <div className={classes.container}>
+    <div className={classes.container} onClick={onClickHandler}>
       <h4 className={classes.heading}>{cardData.title}</h4>
       <p className={classes.text}>{cardData.description}</p>
       <button type="button" onClick={onDelete} className={classes.btn}>

@@ -1,0 +1,91 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal {
+  height: 74vh;
+  width: 30vw;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 35vw;
+  z-index: 2;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading h3 {
+  margin: 0.5em;
+  font-size: 1.5em;
+}
+
+.heading span {
+  height: 20px;
+  width: 20px;
+  background-image: url("/src/assets/images/close.png");
+  background-size: cover;
+}
+
+.form {
+  width: 28.7vw;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  gap: 5px;
+  padding: 10px;
+}
+
+input,
+select,
+textarea {
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+textarea {
+  resize: none;
+  flex-grow: 2;
+  min-height: 5em;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin: 0.2rem 0 0.5rem;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  padding: 0.2rem 1rem;
+  margin: 0.5rem 0;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}

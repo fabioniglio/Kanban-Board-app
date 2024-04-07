@@ -1,132 +1,82 @@
 import { useState } from "react";
 import classes from "../styles/Section.module.css";
 import Card from "./Card";
-import Modal from "./Modal";
+import CardDetail from "./CardDetail";
 
-const Section = ({ status, kanbanDataList }) => {
-  const [dataList, setDataList] = useState(
-    kanbanDataList.filter((currentData) => {
-      return currentData.status === status;
-    })
-  );
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState("add");
+const Section = ({ status, kanbanDataList, handleKanbanDataList }) => {
+  const dataList = kanbanDataList.filter((currentData) => {
+    return currentData.status === status;
+  });
 
-  const handleCardSelect = (cardData) => {
-    setSelectedCard(cardData);
-    setModalMode("edit");
-    setIsModalOpen(true);
+  const [showCardDetail, setShowCardDetail] = useState(false);
+  const toggleShowCardDetail = () => {
+    setShowCardDetail(!showCardDetail);
   };
 
-  const handleAddNew = () => {
-    setSelectedCard({
-      id: null,
+  const [cardDetailMode, setCardDetailMode] = useState("new");
+  const handleCardDetailMode = (mode) => {
+    setCardDetailMode(mode);
+  };
+
+  const [cardData, setCardData] = useState({});
+
+  const handleCardData = (cardData) => {
+    setCardData(cardData);
+  };
+
+  const handleCardClick = (cardDetail) => {
+    handleCardDetailMode("show");
+    handleCardData(cardDetail);
+    toggleShowCardDetail();
+  };
+
+  const newCardHandler = () => {
+    handleCardDetailMode("new");
+    handleCardData({
+      id: String(Number(kanbanDataList.at(-1).id) + 1),
       title: "",
       description: "",
       assignee: "",
       status: status,
-      priority: "",
-      createdDate: "",
-      dueDate: "",
+      priority: "High",
     });
-    setModalMode("add");
-    setIsModalOpen(true);
+    toggleShowCardDetail();
   };
 
-  const deleteCard = (cardId) => {
-    setDataList(
-      dataList.filter((currentData) => {
-        return currentData.id != cardId;
-      })
-    );
+  const handleDataList = (newCard) => {
+    if (kanbanDataList.find((ele) => ele.id === newCard.id))
+      handleKanbanDataList("edit", newCard);
+    else handleKanbanDataList("add", newCard);
   };
 
-  const handleAddSubmit = (e) => {
-    e.preventDefault();
-    const newCard = {
-      ...selectedCard,
-      id: Date.now().toString(),
-    };
-    setDataList([...dataList, newCard]);
-    setIsModalOpen(false);
-    setSelectedCard(null);
-  };
-
-  const handleEditSubmit = (e) => {
-    e.preventDefault();
-
-    if (selectedCard && selectedCard.id) {
-      const updatedDataList = dataList.map((item) =>
-        item.id === selectedCard.id ? { ...item, ...selectedCard } : item
-      );
-      setDataList(updatedDataList);
-      setIsModalOpen(false);
-      setSelectedCard(null);
-    } else {
-      console.log("Error: selectedCard.id is not set correctly.");
-    }
+  const deleteCard = (deleteCard) => {
+    handleKanbanDataList("delete", deleteCard);
   };
 
   return (
     <div className={classes.container}>
       <h3>{status}</h3>
-      {dataList.map((currentData) => {
+      {dataList.map((currentCardData) => {
         return (
-          // <div>
           <Card
-            key={currentData.id}
-            onClick={() => handleCardSelect(currentData)}
-            cardData={currentData}
-            onDelete={() => deleteCard(currentData.id)}
+            key={currentCardData.id}
+            cardData={currentCardData}
+            onClickHandler={() => handleCardClick(currentCardData)}
+            onDelete={() => deleteCard(currentCardData)}
           />
-          // </div>
         );
       })}
-      <button type="button" className={classes.btn} onClick={handleAddNew}>
+      <button type="button" className={classes.btn} onClick={newCardHandler}>
         +
       </button>
-      <Modal
-        show={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setSelectedCard(null);
-          setModalMode("add");
-        }}
-      >
-        {selectedCard && (
-          <form
-            onSubmit={modalMode === "add" ? handleAddSubmit : handleEditSubmit}
-            className="modal-content"
-          >
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              value={selectedCard.title}
-              onChange={(e) =>
-                setSelectedCard({ ...selectedCard, title: e.target.value })
-              }
-            />
-
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              value={selectedCard.description}
-              onChange={(e) =>
-                setSelectedCard({
-                  ...selectedCard,
-                  description: e.target.value,
-                })
-              }
-            ></textarea>
-
-            <button type="submit" className="button">
-              Save Changes
-            </button>
-          </form>
-        )}
-      </Modal>
+      {showCardDetail && (
+        <CardDetail
+          cardDetailMode={cardDetailMode}
+          cardData={cardData}
+          handleDataList={handleDataList}
+          toggleShowCardDetail={toggleShowCardDetail}
+        />
+      )}
     </div>
   );
 };
