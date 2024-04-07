@@ -10,12 +10,24 @@
   overflow-y: auto;
 }
 
+.cardsAndButtonContainer {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding-bottom: 2rem; /* Increase bottom padding to create space for the button */
+  align-items: center;
+}
+
 .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px; /* Adjust size as needed */
-  height: 50px; /* Adjust size as needed */
+  min-width: 4rem; /* Ensure it doesn't get smaller than this */
+  min-height: 4rem;
+  width: 4rem; /* Adjust size as needed */
+  height: 4rem; /* Adjust size as needed */
   margin: 10px;
   border-radius: 50%; /* Circular shape */
   background-color: #007bff; /* Bright, noticeable color */
