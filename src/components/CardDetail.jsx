@@ -56,7 +56,6 @@ const CardDetail = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               disabled={isDisabled}
-              required
             ></textarea>
           </label>
           <label>
