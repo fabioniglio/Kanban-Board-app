@@ -41,9 +41,17 @@
   align-items: center;
 }
 
-.profilePicture {
-  width: 200px;
-  height: 200px;
+.profilePictureJinisha {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.profilePictureFabio {
+  width: 12rem;
+  height: 12rem;
   border-radius: 50%;
   border: 2px solid #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
@@ -63,5 +71,5 @@
 }
 
 .icon {
-  width: 30px;
+  width: 40px;
 }

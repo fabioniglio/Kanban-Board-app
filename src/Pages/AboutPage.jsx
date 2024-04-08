@@ -24,7 +24,7 @@ function AboutPage() {
           <img
             src={jinishaProfilePhoto}
             alt="Jinisha Profile"
-            className={classes.profilePicture}
+            className={classes.profilePictureJinisha}
           />
           <p className={classes.profileName}>Jinisha Patel</p>
           <div className={classes.iconContainer}>
@@ -56,7 +56,7 @@ function AboutPage() {
           <img
             src={fabioProfilePhoto}
             alt="Fabio Profile"
-            className={classes.profilePicture}
+            className={classes.profilePictureFabio}
           />
           <p className={classes.profileName}>Fabio Niglio</p>
           <div className={classes.iconContainer}>
