@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import classes from "../styles/Section.module.css";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 
-const Section = ({ status, kanbanDataList, handleKanbanDataList }) => {
+const Section = ({ status, kanbanDataList, handleKanbanDataList, id }) => {
   const dataList = kanbanDataList.filter((currentData) => {
     return currentData.status === status;
   });
@@ -57,16 +58,30 @@ const Section = ({ status, kanbanDataList, handleKanbanDataList }) => {
     <div className={classes.container}>
       <h3>{status}</h3>
       <div className={classes.cardsAndButtonContainer}>
-        {dataList.map((currentCardData) => {
-          return (
-            <Card
-              key={currentCardData.id}
-              cardData={currentCardData}
-              onClickHandler={() => handleCardClick(currentCardData)}
-              onDelete={() => deleteCard(currentCardData)}
-            />
-          );
-        })}
+        <Droppable droppableId={id}>
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className={classes.cardsAndButtonContainer}
+              // You can use snapshot.isDraggingOver to apply conditional styling
+              // style={{
+              //   backgroundColor: snapshot.isDraggingOver ? "blue" : "grey",
+              // }}
+            >
+              {dataList.map((currentCardData, index) => (
+                <Card
+                  key={currentCardData.id}
+                  cardData={currentCardData}
+                  onClickHandler={() => handleCardClick(currentCardData)}
+                  onDelete={() => deleteCard(currentCardData)}
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
 
         <button type="button" className={classes.btn} onClick={newCardHandler}>
           +
