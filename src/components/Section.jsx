@@ -39,6 +39,8 @@ const Section = ({ status, kanbanDataList, handleKanbanDataList }) => {
       assignee: "",
       status: status,
       priority: "High",
+      dueDate: "",
+      createdDate: new Date().toISOString().split("T")[0],
     });
     toggleShowCardDetail();
   };

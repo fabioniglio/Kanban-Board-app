@@ -7,7 +7,7 @@ const Footer = () => {
         href="https://github.com/fabioniglio/Kanban-Board-app"
         className={classes.link}
       >
-        GitHub
+        GitHub Repository
       </a>
     </div>
   );

@@ -7,10 +7,15 @@ import { v4 as uuidv4 } from "uuid";
 const ContentPage = () => {
   const taskType = ["To Do", "In Progress", "Done"];
   const [kanbanDataList, setKanbanDataList] = useState(kanbanData);
+  const [toastMessage, setToastMessage] = useState("");
   const handleKanbanDataList = (operation, data) => {
     switch (operation) {
       case "add": {
         setKanbanDataList((prevList) => [...prevList, data]);
+        setToastMessage("saved");
+        setTimeout(() => {
+          setToastMessage("");
+        }, 1000);
         break;
       }
       case "edit": {
@@ -22,6 +27,10 @@ const ContentPage = () => {
             return currentData;
           })
         );
+        setToastMessage("updated");
+        setTimeout(() => {
+          setToastMessage("");
+        }, 1000);
         break;
       }
       case "delete": {
@@ -30,6 +39,10 @@ const ContentPage = () => {
             return currentData.id != data.id;
           })
         );
+        setToastMessage("deleted");
+        setTimeout(() => {
+          setToastMessage("");
+        }, 1000);
         break;
       }
       default:
@@ -48,6 +61,11 @@ const ContentPage = () => {
           />
         );
       })}
+      {toastMessage && (
+        <span
+          className={classes.toast}
+        >{`Data ${toastMessage} successfully`}</span>
+      )}
     </div>
   );
 };
