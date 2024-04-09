@@ -59,7 +59,7 @@ const ContentPage = () => {
     });
 
     if (newIndexInFullList === -1) {
-      newIndexInFullList = newList.length; // Insert at end if specific index not found or inserting after the last task of the same status
+      newIndexInFullList = newList.length;
     }
 
     newList.splice(newIndexInFullList, 0, draggedTask);
