@@ -29,27 +29,52 @@ const ContentPage = () => {
   }, [kanbanData]);
 
   const handleDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
+    const { source, destination } = result;
+    console.log(result);
+    // Do nothing if dropped outside the list or if there's no destination
+    if (!destination) return;
 
-    if (!destination || source.droppableId === destination.droppableId) return;
+    const sourceId = parseInt(source.droppableId);
+    const destinationId = parseInt(destination.droppableId);
 
-    const allTasks = [...toDo, ...inProgress, ...done];
-    const task = findItemById(draggableId, allTasks);
+    // Deep copy the original lists to avoid directly mutating the state
+    const start =
+      sourceId === 0 ? [...toDo] : sourceId === 1 ? [...inProgress] : [...done];
+    const finish =
+      destinationId === 0
+        ? [...toDo]
+        : destinationId === 1
+        ? [...inProgress]
+        : [...done];
 
-    // Ensure task is found
-    if (!task) return;
+    // Remove the task from its original position
+    const [removed] = start.splice(source.index, 1);
 
-    // Create a copy of task to ensure we're not mutating state directly
-    const updatedTask = {
-      ...task,
-      status: taskType[parseInt(destination.droppableId)],
-    };
+    // If the source and destination columns are the same, re-insert the task at the new position
+    // Otherwise, insert the task into the new column's position
+    if (source.droppableId === destination.droppableId) {
+      start.splice(destination.index, 0, removed);
+    } else {
+      removed.status = taskType[destinationId]; // Update status based on destination
+      finish.splice(destination.index, 0, removed);
+    }
 
+    // Update the state based on the source and destination IDs
+    if (sourceId === 0) setToDo(start);
+    else if (sourceId === 1) setInProgress(start);
+    else if (sourceId === 2) setDone(start);
+
+    if (sourceId !== destinationId) {
+      if (destinationId === 0) setToDo(finish);
+      else if (destinationId === 1) setInProgress(finish);
+      else if (destinationId === 2) setDone(finish);
+    }
+    console.log(done);
     // Delete from previous state first
-    deletePreviousState(source.droppableId, draggableId);
+    //deletePreviousState(source.droppableId, draggableId);
 
     // Then, add to new state
-    setNewState(destination.droppableId, updatedTask);
+    //setNewState(destination.droppableId, updatedTask);
   };
 
   function deletePreviousState(sourceDroppableId, taskId) {
@@ -75,27 +100,32 @@ const ContentPage = () => {
   }
 
   const updateTaskInState = (newTask) => {
+    const filteredToDo = toDo.filter((task) => task.id !== newTask.id);
+    const filteredInProgress = inProgress.filter(
+      (task) => task.id !== newTask.id
+    );
+    const filteredDone = done.filter((task) => task.id !== newTask.id);
     // Update task in the appropriate state based on its status
     if (newTask.status === "To Do") {
       setToDo((prevTasks) => {
         const taskExists = prevTasks.find((task) => task.id === newTask.id);
         return taskExists
           ? prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
-          : [...prevTasks, newTask];
+          : [...filteredToDo, newTask];
       });
     } else if (newTask.status === "In Progress") {
       setInProgress((prevTasks) => {
         const taskExists = prevTasks.find((task) => task.id === newTask.id);
         return taskExists
           ? prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
-          : [...prevTasks, newTask];
+          : [...filteredInProgress, newTask];
       });
     } else if (newTask.status === "Done") {
       setDone((prevTasks) => {
         const taskExists = prevTasks.find((task) => task.id === newTask.id);
         return taskExists
           ? prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
-          : [...prevTasks, newTask];
+          : [...filteredDone, newTask];
       });
     }
   };
@@ -105,6 +135,7 @@ const ContentPage = () => {
       case "add": {
         setKanbanDataList((prevList) => [...prevList, data]);
         updateTaskInState(data);
+        console.log(data);
         break;
       }
       case "edit": {
@@ -116,7 +147,9 @@ const ContentPage = () => {
             return currentData;
           })
         );
+        console.log(data);
         updateTaskInState(data);
+
         break;
       }
       case "delete": {
