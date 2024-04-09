@@ -14,11 +14,11 @@
   padding: 0 9rem;
   font-size: 1.2em;
   line-height: 1.4;
-  margin-top: 50px;
+  margin-top: 3rem;
 }
 
 .appDetails h3 {
-  margin-bottom: 5px;
+  margin-bottom: 0.7rem;
 }
 
 .appDetails p {
@@ -32,7 +32,7 @@
   align-items: center;
   gap: 8rem;
   flex: 1;
-  padding: 20px;
+  padding: 0.2rem;
 }
 
 .profile {
@@ -60,16 +60,16 @@
 .profileName {
   color: white;
   font-size: 2em;
-  margin: 10px;
+  margin: 0.7rem;
 }
 
 .iconContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  gap: 10px;
+  gap: 0.6rem;
 }
 
 .icon {
-  width: 40px;
+  width: 2.5rem;
 }

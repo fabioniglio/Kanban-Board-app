@@ -1,13 +1,13 @@
 .container {
-  padding-left: 50px;
+  padding-left: 3rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 .appLogo {
-  height: 40px;
-  width: 40px;
+  height: 2.5rem;
+  width: 2.5rem;
   margin: 7px;
 }
 

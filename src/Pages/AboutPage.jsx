@@ -10,12 +10,12 @@ function AboutPage() {
       <div className={classes.appDetails}>
         <h3>Kanban App!</h3>
         <p>
-          Kanban App is your go-to solution for streamlined task management.
-          Designed for both individuals and teams, it offers a simple yet
-          powerful way to organize, track, and update tasks. Quickly add tasks
-          to your "To Do" column, and as you make progress, move them through
-          "In Progress" to "Done." This visual approach not only keeps your
-          workflow organized but also visibly tracks your accomplishments.
+          Kanban App is your go-to solution for streamlined task management. It
+          offers a simple yet powerful way to organize, track, and update tasks.
+          Quickly add tasks to your "To Do" column, and as you make progress,
+          move them through "In Progress" to "Done." This visual approach not
+          only keeps your workflow organized but also visibly tracks your
+          accomplishments.
         </p>
       </div>
 

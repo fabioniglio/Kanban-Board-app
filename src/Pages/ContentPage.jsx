@@ -9,7 +9,6 @@ import { useEffect } from "react";
 
 const ContentPage = () => {
   const taskType = ["To Do", "In Progress", "Done"];
-
   const [kanbanDataList, setKanbanDataList] = useState(kanbanData);
   const [toastMessage, setToastMessage] = useState("");
 
@@ -78,7 +77,6 @@ const ContentPage = () => {
         setTimeout(() => {
           setToastMessage("");
         }, 1000);
-        console.log(data);
         break;
       }
       case "edit": {
