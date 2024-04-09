@@ -29,12 +29,6 @@ const CardDetail = ({
       dueDate,
     };
     handleDataList(newTask);
-    // setTitle("");
-    // setDescription("");
-    // setAssignee("");
-    // setStatus("To Do");
-    // setPriority("High");
-    // toggleShowCardDetail();
   };
   return (
     <div className={classes.backdrop}>

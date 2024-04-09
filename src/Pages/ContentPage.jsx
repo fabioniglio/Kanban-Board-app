@@ -16,6 +16,7 @@ const ContentPage = () => {
   useEffect(() => {}, [kanbanDataList]);
 
   const handleDragEnd = (result) => {
+    console.log(result);
     const { draggableId, source, destination } = result;
 
     if (
@@ -60,12 +61,17 @@ const ContentPage = () => {
     });
 
     if (newIndexInFullList === -1) {
-      newIndexInFullList = newList.length; // Insert at end if specific index not found or inserting after the last task of the same status
+      newIndexInFullList = newList.length;
     }
 
     newList.splice(newIndexInFullList, 0, draggedTask);
 
     setKanbanDataList(newList);
+
+    setToastMessage("saved");
+    setTimeout(() => {
+      setToastMessage("");
+    }, 1000);
   };
 
   const handleKanbanDataList = (operation, data) => {
@@ -97,8 +103,10 @@ const ContentPage = () => {
         break;
       }
       case "delete": {
-        setKanbanDataList((prevList) =>
-          prevList.filter((currentData) => {
+        const copy = JSON.parse(JSON.stringify(kanbanDataList));
+
+        setKanbanDataList(
+          copy.filter((currentData) => {
             return currentData.id != data.id;
           })
         );

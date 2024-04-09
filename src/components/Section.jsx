@@ -62,15 +62,11 @@ const Section = ({ status, kanbanDataList, handleKanbanDataList, id }) => {
       <h3>{status}</h3>
       <div className={classes.cardsAndButtonContainer}>
         <Droppable droppableId={id}>
-          {(provided, snapshot) => (
+          {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
               className={classes.cardsAndButtonContainer}
-              // You can use snapshot.isDraggingOver to apply conditional styling
-              // style={{
-              //   backgroundColor: snapshot.isDraggingOver ? "blue" : "grey",
-              // }}
             >
               {dataList.map((currentCardData, index) => (
                 <Card

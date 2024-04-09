@@ -9,18 +9,18 @@ import { Draggable } from "react-beautiful-dnd";
 
 const Card = ({ cardData, onClickHandler, onDelete, index }) => {
   return (
-    <Draggable draggableId={`${cardData.id}`} index={index}>
-      {(provided, snapshot) => (
+    <Draggable
+      key={`${cardData.id}`}
+      draggableId={`${cardData.id}`}
+      index={index}
+    >
+      {(provided) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className={classes.container}
           onClick={onClickHandler}
-          // You can use snapshot.isDragging to apply conditional styling
-          // style={{
-          //   backgroundColor: snapshot.isDragging ? "lightgreen" : "grey",
-          // }}
         >
           <div className={classes.firstLine}>
             <h4 className={classes.heading}>{cardData.title}</h4>
