@@ -10,128 +10,73 @@ import { useEffect } from "react";
 const ContentPage = () => {
   const taskType = ["To Do", "In Progress", "Done"];
 
-  const [toDo, setToDo] = useState([]);
-  const [inProgress, setInProgress] = useState([]);
-  const [done, setDone] = useState([]);
-
   const [kanbanDataList, setKanbanDataList] = useState(kanbanData);
 
-  useEffect(() => {
-    const toDoTasks = kanbanDataList.filter((task) => task.status === "To Do");
-    const inProgressTasks = kanbanDataList.filter(
-      (task) => task.status === "In Progress"
-    );
-    const doneTasks = kanbanDataList.filter((task) => task.status === "Done");
-    console.log(kanbanDataList);
-    setToDo(toDoTasks);
-    setInProgress(inProgressTasks);
-    setDone(doneTasks);
-  }, [kanbanDataList]);
+  useEffect(() => {}, [kanbanDataList]);
 
   const handleDragEnd = (result) => {
-    const { source, destination } = result;
-    console.log(result);
-    // Do nothing if dropped outside the list or if there's no destination
-    if (!destination) return;
+    const { draggableId, source, destination } = result;
 
-    const sourceId = parseInt(source.droppableId);
-    const destinationId = parseInt(destination.droppableId);
+    // Exit if there's no destination or the item is dropped back into its original position
+    if (
+      !destination ||
+      (source.droppableId === destination.droppableId &&
+        source.index === destination.index)
+    ) {
+      return;
+    }
 
-    // Deep copy the original lists to avoid directly mutating the state
-    const start =
-      sourceId === 0
-        ? JSON.parse(JSON.stringify(toDo))
-        : sourceId === 1
-        ? JSON.parse(JSON.stringify(inProgress))
-        : JSON.parse(JSON.stringify(done));
-    const finish =
-      destinationId === 0
-        ? JSON.parse(JSON.stringify(toDo))
-        : destinationId === 1
-        ? JSON.parse(JSON.stringify(inProgress))
-        : JSON.parse(JSON.stringify(done));
+    const newList = Array.from(kanbanDataList);
+    const draggedTaskIndex = newList.findIndex(
+      (task) => task.id === draggableId
+    );
+    const draggedTask = newList[draggedTaskIndex];
+
+    // Ensure the dragged task is found
+    if (!draggedTask) return;
+
+    // Update the task's status based on the new section it's dropped into
+    draggedTask.status = taskType[parseInt(destination.droppableId)];
 
     // Remove the task from its original position
-    const [removed] = start.splice(source.index, 1);
+    newList.splice(draggedTaskIndex, 1);
 
-    // If the source and destination columns are the same, re-insert the task at the new position
-    // Otherwise, insert the task into the new column's position
-    if (source.droppableId === destination.droppableId) {
-      start.splice(destination.index, 0, removed);
-    } else {
-      removed.status = taskType[destinationId]; // Update status based on destination
-      finish.splice(destination.index, 0, removed);
-    }
-
-    // Update the state based on the source and destination IDs
-    if (sourceId === 0) setToDo(start);
-    else if (sourceId === 1) setInProgress(start);
-    else if (sourceId === 2) setDone(start);
-
-    if (sourceId !== destinationId) {
-      if (destinationId === 0) setToDo(finish);
-      else if (destinationId === 1) setInProgress(finish);
-      else if (destinationId === 2) setDone(finish);
-    }
-    console.log(done);
-    // Delete from previous state first
-    //deletePreviousState(source.droppableId, draggableId);
-
-    // Then, add to new state
-    //setNewState(destination.droppableId, updatedTask);
-  };
-
-  function deletePreviousState(sourceDroppableId, taskId) {
-    // Convert sourceDroppableId to match taskType index
-    const sourceIndex = parseInt(sourceDroppableId);
-    if (sourceIndex === 0)
-      setToDo((prev) => prev.filter((item) => item.id !== taskId));
-    if (sourceIndex === 1)
-      setInProgress((prev) => prev.filter((item) => item.id !== taskId));
-    if (sourceIndex === 2)
-      setDone((prev) => prev.filter((item) => item.id !== taskId));
-  }
-
-  function setNewState(destinationDroppableId, task) {
-    // Convert destinationDroppableId to match taskType index
-    const destinationIndex = parseInt(destinationDroppableId);
-    if (destinationIndex === 0) setToDo((prev) => [task, ...prev]);
-    if (destinationIndex === 1) setInProgress((prev) => [task, ...prev]);
-    if (destinationIndex === 2) setDone((prev) => [task, ...prev]);
-  }
-  function findItemById(id, array) {
-    return array.find((item) => item.id == id);
-  }
-
-  const updateTaskInState = (newTask) => {
-    const filteredToDo = toDo.filter((task) => task.id !== newTask.id);
-    const filteredInProgress = inProgress.filter(
-      (task) => task.id !== newTask.id
+    // Calculate the new insertion index within the new status
+    // First, filter tasks by the new status to only work with relevant subset
+    const tasksInNewStatus = newList.filter(
+      (task) => task.status === draggedTask.status
     );
-    const filteredDone = done.filter((task) => task.id !== newTask.id);
-    // Update task in the appropriate state based on its status
-    if (newTask.status === "To Do") {
-      setToDo((prevTasks) => {
-        const taskExists = prevTasks.find((task) => task.id === newTask.id);
-        return taskExists
-          ? prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
-          : [...filteredToDo, newTask];
-      });
-    } else if (newTask.status === "In Progress") {
-      setInProgress((prevTasks) => {
-        const taskExists = prevTasks.find((task) => task.id === newTask.id);
-        return taskExists
-          ? prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
-          : [...filteredInProgress, newTask];
-      });
-    } else if (newTask.status === "Done") {
-      setDone((prevTasks) => {
-        const taskExists = prevTasks.find((task) => task.id === newTask.id);
-        return taskExists
-          ? prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
-          : [...filteredDone, newTask];
-      });
+
+    // Find the index of the task in the new status where the dragged task should be inserted
+    let newIndexInFiltered = destination.index;
+
+    // If dropping beyond the last item, adjust the index to the end of the filtered list
+    if (newIndexInFiltered > tasksInNewStatus.length) {
+      newIndexInFiltered = tasksInNewStatus.length;
     }
+
+    // Convert the index in the filtered list back to an index in the full list
+    let newIndexInFullList = newList.findIndex((task, index) => {
+      if (task.status !== draggedTask.status) return false; // Skip tasks of other statuses
+      if (newIndexInFiltered === 0) return true; // If we're inserting at the start
+      const prevTask = newList[index - 1];
+      return (
+        prevTask &&
+        prevTask.status === draggedTask.status &&
+        --newIndexInFiltered === 0
+      );
+    });
+
+    // If not found, or inserting at the end, adjust the index accordingly
+    if (newIndexInFullList === -1) {
+      newIndexInFullList = newList.length; // Insert at end if specific index not found or inserting after the last task of the same status
+    }
+
+    // Insert the dragged task at the calculated position
+    newList.splice(newIndexInFullList, 0, draggedTask);
+
+    // Update the state with the modified list
+    setKanbanDataList(newList);
   };
 
   const handleKanbanDataList = (operation, data) => {
@@ -140,7 +85,7 @@ const ContentPage = () => {
         const copy = JSON.parse(JSON.stringify(kanbanDataList));
         copy.push(data);
         setKanbanDataList(/* (prevList) => [...prevList, data] */ copy);
-        updateTaskInState(data);
+        //updateTaskInState(data);
         console.log(data);
         break;
       }
@@ -154,7 +99,7 @@ const ContentPage = () => {
           })
         );
         console.log(data);
-        updateTaskInState(data);
+        //updateTaskInState(data);
 
         break;
       }
@@ -178,12 +123,22 @@ const ContentPage = () => {
         {taskType.map((type, index) => {
           let indexString = index.toString();
           let kanbanDataForSection = [];
-          if (type === "To Do") kanbanDataForSection = toDo;
-          else if (type === "In Progress") kanbanDataForSection = inProgress;
-          else if (type === "Done") kanbanDataForSection = done;
+          let key = uuidv4();
+          if (type === "To Do")
+            kanbanDataForSection = kanbanDataList.filter(
+              (task) => task.status === "To Do"
+            );
+          else if (type === "In Progress")
+            kanbanDataForSection = kanbanDataList.filter(
+              (task) => task.status === "In Progress"
+            );
+          else if (type === "Done")
+            kanbanDataForSection = kanbanDataList.filter(
+              (task) => task.status === "Done"
+            );
           return (
             <Section
-              key={uuidv4()}
+              key={key}
               id={indexString}
               status={type}
               kanbanDataList={kanbanDataForSection}
