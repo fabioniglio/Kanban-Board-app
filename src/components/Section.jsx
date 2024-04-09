@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import classes from "../styles/Section.module.css";
 import Card from "./Card";
+import { v4 as uuidv4 } from "uuid";
 import CardDetail from "./CardDetail";
 
 const Section = ({ status, kanbanDataList, handleKanbanDataList, id }) => {
@@ -34,7 +35,7 @@ const Section = ({ status, kanbanDataList, handleKanbanDataList, id }) => {
   const newCardHandler = () => {
     handleCardDetailMode("new");
     handleCardData({
-      id: String(Number(kanbanDataList.at(-1).id) + 1),
+      id: uuidv4(),
       title: "",
       description: "",
       assignee: "",

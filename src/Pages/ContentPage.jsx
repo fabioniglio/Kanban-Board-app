@@ -17,16 +17,16 @@ const ContentPage = () => {
   const [kanbanDataList, setKanbanDataList] = useState(kanbanData);
 
   useEffect(() => {
-    const toDoTasks = kanbanData.filter((task) => task.status === "To Do");
-    const inProgressTasks = kanbanData.filter(
+    const toDoTasks = kanbanDataList.filter((task) => task.status === "To Do");
+    const inProgressTasks = kanbanDataList.filter(
       (task) => task.status === "In Progress"
     );
-    const doneTasks = kanbanData.filter((task) => task.status === "Done");
-
+    const doneTasks = kanbanDataList.filter((task) => task.status === "Done");
+    console.log(kanbanDataList);
     setToDo(toDoTasks);
     setInProgress(inProgressTasks);
     setDone(doneTasks);
-  }, [kanbanData]);
+  }, [kanbanDataList]);
 
   const handleDragEnd = (result) => {
     const { source, destination } = result;
@@ -39,13 +39,17 @@ const ContentPage = () => {
 
     // Deep copy the original lists to avoid directly mutating the state
     const start =
-      sourceId === 0 ? [...toDo] : sourceId === 1 ? [...inProgress] : [...done];
+      sourceId === 0
+        ? JSON.parse(JSON.stringify(toDo))
+        : sourceId === 1
+        ? JSON.parse(JSON.stringify(inProgress))
+        : JSON.parse(JSON.stringify(done));
     const finish =
       destinationId === 0
-        ? [...toDo]
+        ? JSON.parse(JSON.stringify(toDo))
         : destinationId === 1
-        ? [...inProgress]
-        : [...done];
+        ? JSON.parse(JSON.stringify(inProgress))
+        : JSON.parse(JSON.stringify(done));
 
     // Remove the task from its original position
     const [removed] = start.splice(source.index, 1);
@@ -133,7 +137,9 @@ const ContentPage = () => {
   const handleKanbanDataList = (operation, data) => {
     switch (operation) {
       case "add": {
-        setKanbanDataList((prevList) => [...prevList, data]);
+        const copy = JSON.parse(JSON.stringify(kanbanDataList));
+        copy.push(data);
+        setKanbanDataList(/* (prevList) => [...prevList, data] */ copy);
         updateTaskInState(data);
         console.log(data);
         break;
@@ -158,7 +164,7 @@ const ContentPage = () => {
             return currentData.id != data.id;
           })
         );
-        updateTaskInState(data);
+
         break;
       }
       default:
