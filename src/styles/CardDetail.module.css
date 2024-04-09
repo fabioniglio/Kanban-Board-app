@@ -50,13 +50,32 @@
   padding: 10px;
 }
 
-input,
-select,
+input[type="text"],
 textarea {
   width: calc(100% - 1rem);
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
+}
+
+.formFlex {
+  width: calc(100% - 1rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.formFlex label {
+  flex: 1;
+}
+
+input[type="date"],
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  flex: 1;
 }
 
 textarea {

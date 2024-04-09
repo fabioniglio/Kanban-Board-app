@@ -11,6 +11,7 @@ const ContentPage = () => {
   const taskType = ["To Do", "In Progress", "Done"];
 
   const [kanbanDataList, setKanbanDataList] = useState(kanbanData);
+  const [toastMessage, setToastMessage] = useState("");
 
   useEffect(() => {}, [kanbanDataList]);
 
@@ -73,6 +74,10 @@ const ContentPage = () => {
         const copy = JSON.parse(JSON.stringify(kanbanDataList));
         copy.push(data);
         setKanbanDataList(copy);
+        setToastMessage("saved");
+        setTimeout(() => {
+          setToastMessage("");
+        }, 1000);
 
         console.log(data);
         break;
@@ -86,8 +91,10 @@ const ContentPage = () => {
             return currentData;
           })
         );
-        console.log(data);
-
+        setToastMessage("updated");
+        setTimeout(() => {
+          setToastMessage("");
+        }, 1000);
         break;
       }
       case "delete": {
@@ -96,7 +103,10 @@ const ContentPage = () => {
             return currentData.id != data.id;
           })
         );
-
+        setToastMessage("deleted");
+        setTimeout(() => {
+          setToastMessage("");
+        }, 1000);
         break;
       }
       default:
@@ -133,6 +143,11 @@ const ContentPage = () => {
             />
           );
         })}
+        {toastMessage && (
+          <span
+            className={classes.toast}
+          >{`Data ${toastMessage} successfully`}</span>
+        )}
       </div>
     </DragDropContext>
   );
