@@ -17,7 +17,6 @@ const ContentPage = () => {
   const handleDragEnd = (result) => {
     const { draggableId, source, destination } = result;
 
-    // Exit if there's no destination or the item is dropped back into its original position
     if (
       !destination ||
       (source.droppableId === destination.droppableId &&
@@ -32,33 +31,25 @@ const ContentPage = () => {
     );
     const draggedTask = newList[draggedTaskIndex];
 
-    // Ensure the dragged task is found
     if (!draggedTask) return;
 
-    // Update the task's status based on the new section it's dropped into
     draggedTask.status = taskType[parseInt(destination.droppableId)];
 
-    // Remove the task from its original position
     newList.splice(draggedTaskIndex, 1);
 
-    // Calculate the new insertion index within the new status
-    // First, filter tasks by the new status to only work with relevant subset
     const tasksInNewStatus = newList.filter(
       (task) => task.status === draggedTask.status
     );
 
-    // Find the index of the task in the new status where the dragged task should be inserted
     let newIndexInFiltered = destination.index;
 
-    // If dropping beyond the last item, adjust the index to the end of the filtered list
     if (newIndexInFiltered > tasksInNewStatus.length) {
       newIndexInFiltered = tasksInNewStatus.length;
     }
 
-    // Convert the index in the filtered list back to an index in the full list
     let newIndexInFullList = newList.findIndex((task, index) => {
-      if (task.status !== draggedTask.status) return false; // Skip tasks of other statuses
-      if (newIndexInFiltered === 0) return true; // If we're inserting at the start
+      if (task.status !== draggedTask.status) return false;
+      if (newIndexInFiltered === 0) return true;
       const prevTask = newList[index - 1];
       return (
         prevTask &&
@@ -67,15 +58,12 @@ const ContentPage = () => {
       );
     });
 
-    // If not found, or inserting at the end, adjust the index accordingly
     if (newIndexInFullList === -1) {
       newIndexInFullList = newList.length; // Insert at end if specific index not found or inserting after the last task of the same status
     }
 
-    // Insert the dragged task at the calculated position
     newList.splice(newIndexInFullList, 0, draggedTask);
 
-    // Update the state with the modified list
     setKanbanDataList(newList);
   };
 
@@ -84,8 +72,8 @@ const ContentPage = () => {
       case "add": {
         const copy = JSON.parse(JSON.stringify(kanbanDataList));
         copy.push(data);
-        setKanbanDataList(/* (prevList) => [...prevList, data] */ copy);
-        //updateTaskInState(data);
+        setKanbanDataList(copy);
+
         console.log(data);
         break;
       }
@@ -99,7 +87,6 @@ const ContentPage = () => {
           })
         );
         console.log(data);
-        //updateTaskInState(data);
 
         break;
       }
