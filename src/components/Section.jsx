@@ -60,36 +60,34 @@ const Section = ({ status, kanbanDataList, handleKanbanDataList, id }) => {
   return (
     <div className={classes.container}>
       <h3>{status}</h3>
-      <div className={classes.cardsAndButtonContainer}>
-        <Droppable droppableId={id}>
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className={classes.cardsAndButtonContainer}
-              // You can use snapshot.isDraggingOver to apply conditional styling
-              // style={{
-              //   backgroundColor: snapshot.isDraggingOver ? "blue" : "grey",
-              // }}
-            >
-              {dataList.map((currentCardData, index) => (
-                <Card
-                  key={currentCardData.id}
-                  cardData={currentCardData}
-                  onClickHandler={() => handleCardClick(currentCardData)}
-                  onDelete={() => deleteCard(currentCardData)}
-                  index={index}
-                />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+      <Droppable droppableId={id}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={classes.cardsAndButtonContainer}
+            // You can use snapshot.isDraggingOver to apply conditional styling
+            // style={{
+            //   backgroundColor: snapshot.isDraggingOver ? "blue" : "grey",
+            // }}
+          >
+            {dataList.map((currentCardData, index) => (
+              <Card
+                key={currentCardData.id}
+                cardData={currentCardData}
+                onClickHandler={() => handleCardClick(currentCardData)}
+                onDelete={() => deleteCard(currentCardData)}
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
 
-        <button type="button" className={classes.btn} onClick={newCardHandler}>
-          +
-        </button>
-      </div>
+      <button type="button" className={classes.btn} onClick={newCardHandler}>
+        +
+      </button>
 
       {showCardDetail && (
         <CardDetail

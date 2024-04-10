@@ -111,6 +111,7 @@ const CardDetail = ({
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
+                min={createdDate}
                 disabled={isDisabled}
                 required
               />

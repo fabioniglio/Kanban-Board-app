@@ -7,25 +7,6 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  overflow-y: auto;
-}
-
-.container::-webkit-scrollbar {
-  width: 8px; /* Adjust the width of the scrollbar */
-}
-
-.container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* The track (background) of the scrollbar */
-  border-radius: 10px; /* Optional: Adds rounded corners to the scrollbar track */
-}
-
-.container::-webkit-scrollbar-thumb {
-  background-color: #888; /* The scroll handle */
-  border-radius: 10px; /* Rounded corners on the scroll handle */
-}
-
-.container::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Darker color on hover */
 }
 
 .cardsAndButtonContainer {
@@ -34,24 +15,35 @@
   width: 100%;
   padding-bottom: 2rem; /* Increase bottom padding to create space for the button */
   align-items: center;
+  overflow-y: auto;
 }
 
-.buttonContainer {
-  position: sticky;
-  top: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.cardsAndButtonContainer::-webkit-scrollbar {
+  width: 8px; /* Adjust the width of the scrollbar */
+}
+
+.cardsAndButtonContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* The track (background) of the scrollbar */
+  border-radius: 10px; /* Optional: Adds rounded corners to the scrollbar track */
+}
+
+.cardsAndButtonContainer::-webkit-scrollbar-thumb {
+  background-color: #888; /* The scroll handle */
+  border-radius: 10px; /* Rounded corners on the scroll handle */
+}
+
+.cardsAndButtonContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker color on hover */
 }
 
 .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 4rem; /* Ensure it doesn't get smaller than this */
-  min-height: 4rem;
-  width: 4rem; /* Adjust size as needed */
-  height: 4rem; /* Adjust size as needed */
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  width: 3.5rem; /* Adjust size as needed */
+  height: 3.5rem; /* Adjust size as needed */
   margin: 10px;
   border-radius: 50%; /* Circular shape */
   background-color: #007bff; /* Bright, noticeable color */
@@ -61,6 +53,8 @@
   cursor: pointer; /* Indicates the button is clickable */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions for interactions */
+  position: sticky;
+  bottom: 20px;
 }
 
 .btn:hover,
