@@ -1,0 +1,13 @@
+.container {
+  width: auto;
+  height: 5vh;
+  margin: 5px 5px;
+  background-color: #ab9d8c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  background-color: #82654f;
+}

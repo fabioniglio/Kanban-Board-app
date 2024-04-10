@@ -1,0 +1,14 @@
+.container {
+  width: 95vw;
+  height: 2.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+}
+
+.link {
+  text-decoration: none;
+  color: #382e2b;
+  font-weight: bold;
+}

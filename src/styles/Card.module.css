@@ -1,0 +1,102 @@
+.container {
+  width: 90%; /* Makes sure the card does not exceed the section's width */
+  height: auto;
+  background-color: #795f4c7d;
+  text-align: left;
+  padding: 2px 5px;
+  margin: 5px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Adds subtle shadow for depth */
+  border-radius: 5px;
+}
+
+.firstLine {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  margin: 5px;
+  font-size: 1.2em;
+  display: inline;
+}
+
+.priority {
+  height: 0.4em;
+  width: 0.7em;
+  margin: 0 0.5rem;
+}
+
+.btn {
+  width: 1.7em; /* Increased width and height for easier interaction */
+  height: 1.7em;
+  padding: 0;
+  cursor: pointer; /* Ensures it's clear it's clickable */
+  border-radius: 50%;
+}
+
+.btnImg {
+  width: 0.7em;
+  height: auto;
+}
+
+.btn:hover {
+  background-color: #62514c;
+}
+
+.secondLine {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.descContainer {
+  position: relative;
+  display: inline-block; /* Ensure inline positioning */
+}
+
+.descImg {
+  width: 1.7rem;
+  height: auto;
+}
+
+.tooltip {
+  visibility: hidden;
+  height: 0.3em;
+  font-size: 0.6rem;
+  background-color: rgba(0, 0, 0);
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  position: absolute;
+  bottom: -1rem;
+  left: 100%;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.descContainer:hover .tooltip {
+  visibility: visible;
+}
+
+.assignee {
+  width: 1.5em;
+  font-size: 0.8em;
+  color: white;
+  padding: 0.2em;
+  text-align: center;
+  margin: 0.5rem;
+  background-color: #62514c;
+  border-radius: 0.3em;
+}
+
+@media (max-width: 768px) {
+  .container {
+    /* Adjust card styling for smaller screens */
+    padding: 10px;
+  }
+}

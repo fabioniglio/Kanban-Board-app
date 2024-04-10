@@ -1,0 +1,19 @@
+.container {
+  padding-left: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.appLogo {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin: 7px;
+}
+
+.appName {
+  display: inline;
+  margin: 5px;
+  font-size: 1.5em;
+  font-family: "Pacifico", cursive;
+}
